@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+
+    <script>
+
+
+        function jsonp(url, callback, cb) {
+            window[callback] = function (data) {
+                cb(data);
+            }
+            let script = document.createElement("script");
+            script.id = "jsonp";
+            script.src = url + "?callback=" + callback;
+            console.log(script.src);
+            document.body.appendChild(script);
+
+        }
+        let url = "http://118.24.217.112:3001/api/users"
+
+
+    </script>
+
+
+</body>
+
+</html>

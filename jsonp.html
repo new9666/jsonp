@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="jsonp_2019.05.30.js"></script>
+
+<script>
+
+/*
+  // axios 获取数据
+  {
+    let $http = axios.create({
+      baseURL: "http://localhost:3000"
+    });
+
+    $http.get('/api/users').then( data => {
+      console.log( data );
+    });
+  }
+*/
+
+
+  /*
+  // Jsonp 雏形
+  {
+
+
+    let baseUrl = 'http://localhost:3000' ;
+
+    function getData(data) {
+      console.log("Data___");
+      console.log(data)
+    }
+
+    let script = document.createElement("script");
+    script.src = baseUrl + '/api/users?callback=getData';
+    document.body.appendChild(script);
+
+
+
+  }
+  */
+
+  /*
+  // 封装通用 Jsonp 方法
+  {
+
+    function jsonp(options) {
+
+
+      let random = parseInt (Math.random() * 100000000000000000000 );
+      let funName = "geData_" + random;
+      window[funName] = function (data) {
+        options.cb(data);
+      };
+
+      let script = document.createElement("script");
+      script.src = options.url + "?callback=" + funName;
+      document.body.appendChild(script);
+      setTimeout(function () {
+        document.body.removeChild( script );
+      }, 3000)
+
+    }
+
+    jsonp({
+      url: 'http://localhost:3000/api/users',
+      cb: (data) => {
+        console.table( data );
+      }
+    })
+
+
+  }
+  */
+
+
+</script>
+
+
+
+
+
+</body>
+</html>

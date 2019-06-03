@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<body>
+
+
+  <div id="app">
+    <button @click="getData">
+      Jsonp
+    </button>
+
+    <ul>
+      <li>Name - Sex - Age - {{ totalAge }} </li>
+      <li v-for="(item, index) in users" :key="index" :class="{'active': isActive == index}" @click="isActive = index">
+        {{ item.name }} -- {{ item.sex }} ---{{ item.age }} <button @click="item.age ++ ">Add</button>
+      </li>
+    </ul>
+  </div>
+  <script src="./jsonp_2019.05.30.js"></script>
+
+  <script>
+
+
+    let vm = new Vue({
+      el: "#app",
+      data() {
+        return {
+          users: [],
+          isActive: -1
+        }
+      },
+      computed: {
+        totalAge: function () {
+          let total = 0;
+          this.users.forEach((item) => {
+            total += item.age;
+          });
+          return total;
+        }
+      },
+      methods: {
+        getData() {
+          jsonp({
+            url: 'http://localhost:3000/api/users',
+            success: (data) => {
+              this.users = data;
+            }
+          })
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>
